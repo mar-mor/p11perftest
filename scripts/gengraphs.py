@@ -294,9 +294,9 @@ def generate_graphs(xlsfp, sheetname, xlsfp2):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate graphs from spreadsheet of p11perftest results')
     parser.add_argument('xls', metavar='FILE', type=argparse.FileType('rb'), help='Path to Excel spreadsheet')
-    parser.add_argument('-t', '--table', help='Table name.', default='Sheet1')
+    parser.add_argument('-t', '--table', help='Table name.', default=0)
     parser.add_argument('-f', '--format', help='Output format. Defaults to all (png and svg).', choices=['png', 'svg', 'all'], default='all')
-
+    
     parser.add_argument('-p', '--percentiles', help='Display percentile plots on graph. Equivalent to -p95 -p98 -p99.', action='store_true')
     parser.add_argument('-p95', help='Display 95th percentile plot on graph.', action='store_true')
     parser.add_argument('-p98', help='Display 98th percentile plot on graph.', action='store_true')
@@ -334,8 +334,6 @@ if __name__ == '__main__':
 
     if args.percentiles:
         args.p95, args.p98, args.p99 = True, True, True
-
-
 
 
     generate_graphs(args.xls, args.table, args.comparison)
